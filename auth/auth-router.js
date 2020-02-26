@@ -12,12 +12,7 @@ router.post('/register', async (req, res) => {
   user.password = bcrypt.hashSync(user.password, 10);
   try {
     const inserted = await Users.add(user);
-    // a jwt has to be generated here 
-    const token = generateToken(inserted)
-    res.status(201).json({
-      user: inserted,
-      token
-    });
+    res.status(201).json(inserted);
   }
   catch (error) {
     res.status(500).json(error)
